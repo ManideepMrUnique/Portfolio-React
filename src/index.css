@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --primary-white:#ffffff;
+    --primary-orange:#f9ab00;
+}
+body{
+    font-family: "Roboto Condesed sans-serif";
+}
+/****NavBar Style*****/
+.navbar{
+    z-index: 1;
+}
+.navbar-brand>img{
+    max-width:7rem;
+    height: auto;
+    height: auto;
+}
+nav a.nav-link{
+    font-weight: 100;
+    /*letter-spacing: 0.1px;*/
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.navbar-nav>li>a{
+    color: var(--primary-white)!important;
+    border-top: 3px solid rgba(255,255,255,0);
+}
+.navbar-brand{
+    padding: 0!important;
+    height: 6rem !important;
+}
+.navbar-nav>li>a.active,.navbar-nav>li>a:focus{
+    transform: scale(1.1);
+    color: rgb(125, 125, 195)!important;
+}
+.navbar-nav>li>a:hover{
+    border-top: 3px solid var(--primary-orange);
+}
+/****NavBar Style*****/
+/**Header**/
+.NotHead-wrapper{
+    background: url('./Images/PortFolio-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center ;
+    background-attachment: fixed;
+    height: 90vh;
+    display: grid;
+}
+/**Header**/
+/**typed-text**/
+.NotMain-info{
+    color: var(--primary-white);
+    font-size: 8vw;
+    z-index: 1;
+   
+}
+/**typed-text**/
+/**particles**/
+.tsparticles-canvas-el{
+    position: absolute;
+}
+/**particles**/
+/**card**/
+.card{
+    background: transparent!important;
+    color: var(--primary-white);
+    transform: scale(1.2);
+    position: relative;
+    z-index: 1;
+    margin: 50px;
+}
+/**card**/
+
+.details{
+    display: flex!important;
+    flex-wrap: wrap!important;
+    justify-content: end!important;
+}

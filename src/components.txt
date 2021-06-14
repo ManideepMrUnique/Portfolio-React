@@ -1,0 +1,508 @@
+
+body{
+    background-color: black;
+}
+section{
+    background-color: rgba(138, 103, 235, 0.918);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Main{
+    height: auto;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color:rgb(238, 228, 228);
+    border-radius: 25px;
+}
+
+
+****************************************
+*********$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+index.js
+
+import ReactDom from 'react-dom';
+import Apps from './Apps';
+import React from 'react';
+import './index.css';
+ReactDom.render(
+  <Apps /> ,
+  document.getElementById('root')
+);
+***********************
+Apps.js
+
+const curTime=new Date().getHours();
+var greeting='';
+const cssStyle={};
+if(curTime<12)
+{
+    greeting='Good Morning';
+    cssStyle.color='green';
+}
+else if(curTime>12&&curTime<19)
+{
+    greeting='Good Afternoon';
+    cssStyle.color='red';
+}
+else
+{
+    greeting='Good Night';
+    cssStyle.color='yellow';
+}
+function Apps(){
+   return (<>
+   <div>
+    <h1 style={cssStyle}>Hello Sir, {greeting} </h1>
+   </div>
+    </>
+    )
+}
+export default Apps;
+****************************************
+*********$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+index.js
+
+
+import React from 'react';
+import ReactDom from 'react-dom';
+import './index.css';
+import Apps from './Apps';
+ReactDom.render(
+    <>
+    <div className="Cards">
+        <Apps/>
+    </div>
+    </>
+    ,document.getElementById('root')
+);
+
+
+
+Apps.jsx
+
+
+
+import Card from './Card';
+import dataAr from './dataAr';
+function ncard(val){
+    return(
+        <Card
+            key={val.id} //when using map we should have atleast one unique key
+            photo={val.imgData}
+            animeLink={val.linkData}
+        />
+    );
+}
+function Apps()
+{
+    return (
+      /*  <>
+        <Card
+            photo={dataAr[0].imgData}
+            animeLink={dataAr[0].linkData}
+        />
+        <Card
+            photo={dataAr[1].imgData}
+            animeLink={dataAr[1].linkData}
+        />
+        
+        <Card
+            photo={dataAr[2].imgData}
+            animeLink={dataAr[2].linkData}
+        />
+        <Card
+            photo={dataAr[2].imgData}
+            animeLink={dataAr[2].linkData}
+        />
+        </> or   */
+        <>
+        {dataAr.map(ncard)}
+        </>
+        /*
+            or
+            dataAr.map(
+                function ncard(val){
+                    return(
+                     <Card
+                        photo={val.imgData}
+                        animeLink={val.linkData}
+                    />
+                 );
+                }
+            )
+           or
+           Use fat arrow ES6
+           dataAr.map(
+                    (val)=>{
+                    return(
+                     <Card
+                        photo={val.imgData}
+                        animeLink={val.linkData}
+                    />
+                 );
+                }
+            )
+        */
+    );
+}
+export default Apps;
+
+
+
+Card.jsx
+
+
+function Card(props)
+{
+    return(
+        <div className="Card">
+        <img src={props.photo} className="imgName" height="500" width="500"/>
+        <div className="Card_Info">
+            <span>SomeLegend</span>
+            <br></br>
+            <a href={props.animeLink}>
+                <button className="btn">WatchMe</button>
+            </a>
+        </div>
+        </div>
+    );
+}
+export default Card;
+
+
+
+dataAr.jsx
+
+
+const imgUr="https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg";
+const link="https://www1.gogoanime.ai//search.html?keyword=re%20zero";
+const dataAr=[
+        {
+            id:1,
+            imgData:imgUr,
+            linkData:link
+        },
+        {
+            id:2,
+            imgData:imgUr,
+            linkData:link
+        },
+        {
+            id:3,
+            imgData:imgUr,
+            linkData:link
+        },
+        {
+            id:4,
+            imgData:imgUr,
+            linkData:link
+        },
+        {
+            id:5,
+            imgData:imgUr,
+            linkData:link
+        }
+];
+export default dataAr;
+
+
+*****************************
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Increment and Decrement without previous state function
+
+Apps.js
+
+
+
+import { Component } from "react";
+class Apps extends Component{
+    constructor()
+    {
+        super();
+        this.state={
+            cou:0
+        }
+    }
+    Inc(){
+        this.setState({
+            cou:this.state.cou+1
+        });
+    }
+    Dec()
+    {
+        this.setState({
+            cou:this.state.cou-1
+        });
+    }
+    render(){
+    return (
+    <>
+    <h1>{this.state.cou}</h1>
+    <button onClick={()=>this.Inc()}>Incremnet</button>
+    <button onClick={()=>this.Dec()}>Decrement</button>
+    </>
+    );
+}
+   
+}
+export default Apps;
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Using Hooks
+
+
+
+
+
+import { useState } from "react";
+
+const Apps=()=>{
+    const [cou,setCount]=useState(0);
+    const Inc=()=>{
+        setCount(cou+1);
+    }
+    return (
+        <>
+        <h1>{cou}</h1>
+        <button onClick={Inc}>Click Here</button>
+        </>
+    )
+}
+export default Apps;
+
+
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Use setInterval(function,time in ms)
+to call a function infinitely
+
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Using input without form and onChange() method
+when submitting using form ,the page will be
+refreshed, to avoid that use eve.preventionDefault() method
+in called function,eg in OnS function below
+Apps.jsx
+
+
+
+import { useState } from "react";
+
+const Apps=()=>{
+    const [Pname,chaneName]=useState("User");
+    const [Uname,UpN]=useState();
+    const fun=(eve)=>{
+        chaneName(eve.target.value);
+    }
+    const OnS=()=>{
+        UpN(Pname);
+    }
+    return(
+        <div className="Main">
+            <h1>Hello {Uname}</h1>
+            <input type="text" onChange={fun}></input>
+            <button onClick={OnS}>Submit</button>
+        </div>
+    );    
+}
+export default Apps;
+
+
+
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Apps.jsx
+
+Using name for first time
+
+import { useState } from "react";
+const Apps=()=>{
+    const [val,setV]=useState(
+        {
+            fname:"",
+            lname:""
+        }
+    );
+    const[ans,setA]=useState(
+        {
+            fname:"",
+            lname:""
+        }
+    );
+    const changV=(eve)=>{
+       const Value=eve.target.value;
+        const Name=eve.target.name; //name of the element where changV is called
+        setV(
+                (preValObj)=>{
+                   /* if(Name==="fname")
+                    {
+                        return (
+                            {
+                                fname:Value,
+                                lname:preValObj.lname 
+                                //if u dont use preValObj the value
+                                //will be reset to empty
+                                //so to reatain value we use preValObj
+                            }
+                         );
+                    }
+                    if(Name==="lname")
+                    {
+                        return (
+                            {
+                                fname:preValObj.fname,
+                                lname:Value,
+                            }
+                         );
+                    }*/
+                   // orrrrrrrrrrr
+                    return (
+                       {
+                           ...preValObj,
+                           [Name]:Value,
+                       }
+                   );
+                }
+        );
+    }
+    const updV=()=>{
+        console.log(val);
+        setA(
+           {
+               fname:val.fname, 
+               lname:val.lname
+               /*they are no previous values here that is the
+               reason i didnot create a function like above */
+           }
+        );
+        setV(
+            {
+                fname:"", //for resetting the values
+                lname:""
+            }
+        );
+    }
+    return (
+        <div className="Main">
+           <h1>{ans.fname}{ans.lname}</h1>
+           <br/>
+           <input type="text" name="fname" value={val.fname} onChange={changV}></input>
+           <br/>
+           <input type="text" name="lname" value={val.lname} onChange={changV}></input>
+           <br/>
+           <button onClick={updV}>Click</button>
+        </div>
+    );
+}
+export default Apps;
+
+
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+ToDoApplication
+
+
+index.js
+
+
+import ReactDom from 'react-dom';
+import React from 'react';
+import './index.css';
+import ToDoList from './ToDoList';
+ReactDom.render(
+    <section>
+        <ToDoList/>
+    </section>
+           ,
+  document.getElementById('root')
+);
+
+
+ToDoList.jsx
+
+
+
+import ReturnItems from './ReturnItems';
+import { useState } from "react";
+
+const ToDoList=()=>{
+    const [val,setVal]=useState();
+    const [ar,buildAr]=useState([]);
+    const valChange=(eve)=>{
+        setVal(eve.target.value);
+    }
+    const updChange=()=>{
+        buildAr([...ar,val]);
+        /*buildAr((olditems)=>{
+            return [...olditems,val];
+        }) */
+        setVal("");
+    }
+    const remV=(id)=>{
+       buildAr(ar.filter((val,ind)=>{
+            return ind!==id;
+       }));
+    }
+    return (
+        <div className="Main">
+            <br/>
+            <h1>List of Items</h1>
+            <br/>
+            <input type="text" value={val} onChange={valChange}></input>
+            <button onClick={updChange}>Ins</button>
+            <br/>
+            <div className="content">
+               {
+                   ar.map(
+                       (val,ind)=>{
+                            return (
+                                <ReturnItems
+                                key={ind}
+                                id={ind}
+                                tVal={val}
+                                tInd={ind}
+                                funRem={remV}
+                            />);
+                       }
+                   )
+               }
+            </div>
+        </div>
+    );
+}
+export default ToDoList;
+
+
+
+ReturnItems.jsx
+
+const ReturnItems=(props)=>{
+    return (
+      <div className="InContent">
+        <p>{props.tVal}
+        <span>
+        <button onClick={
+            ()=>{
+                props.funRem(props.id);
+            }
+        }
+        >rem</button>
+        </span>
+        </p>
+      </div>
+    );
+}
+export default ReturnItems;
+
+
+*****************************************************************************************
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
